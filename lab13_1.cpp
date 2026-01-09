@@ -19,3 +19,23 @@ int main(){
     cout << "Min = " << B[5];
     return 0;
 }
+void stat(const double a[], int n, double result[]) {
+    double sum = 0.0, geo_log_sum = 0.0, harm_sum = 0.0;
+    double max_val = a[0], min_val = a[0];
+    for (int i = 0; i < n; ++i) {
+        sum += a[i];
+        geo_log_sum += log(a[i]);
+        harm_sum += 1.0 / a[i];
+        if (a[i] > max_val) max_val = a[i];
+        if (a[i] < min_val) min_val = a[i];
+    }
+    result[0] = sum / n;
+    double sd_sum = 0.0;
+    for (int i = 0; i < n; ++i)
+        sd_sum += (a[i] - result[0]) * (a[i] - result[0]);
+    result[1] = sqrt(sd_sum / n);
+    result[2] = exp(geo_log_sum / n);
+    result[3] = n / harm_sum;
+    result[4] = max_val;
+    result[5] = min_val;
+}
